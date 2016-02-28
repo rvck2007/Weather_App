@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var React = require('react/addons');
-var ReactApp = React.createFactory(require('../app/components/ReactApp'));
+var React = require('react');
+var ReactApp = React.createFactory(require('../views/app/components/reactApp'));
 
 /* GET users listing. */
 router.get('/', function(req, res, next) { 

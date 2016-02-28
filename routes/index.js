@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var React = require('react/addons');
-var ReactApp = React.createFactory(require('../app/components/essai'));
+var React = require('react');
+var ReactApp = React.createFactory(require('../views/app/components/essai'));
 
 /* GET home page. */
 router.get('/', function(req, res, next) { 

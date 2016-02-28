@@ -3,8 +3,8 @@ var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var browserHistory = require('react-router').browserHistory;
 
-var ReactApp = require('../ReactApp');
-var Essai = require('../essai');
+var ReactApp = require('../components/reactApp');
+var Essai = require('../components/essai');
 
 var RouterApp = React.createClass({
 

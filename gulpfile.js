@@ -3,7 +3,7 @@ var gulp       = require('gulp'),
 
 gulp.task('build-js', function () {
 
-    gulp.src(['app/main.js'])
+    gulp.src(['views/app/main.js'])
         .pipe(browserify({
             debug: true,
             transform: [ 'reactify' ]
@@ -13,7 +13,7 @@ gulp.task('build-js', function () {
 });
 
 gulp.task('watch-js', function() {
-    gulp.watch(['./app/**/*.js', './app/*.js'], ['build-js']);
+    gulp.watch(['./views/app/**/*.js', './views/app/*.js'], ['build-js']);
 });
 
 gulp.task('default', ['build-js','watch-js']);
