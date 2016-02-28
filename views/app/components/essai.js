@@ -10,7 +10,7 @@ var Essai = React.createClass({
         return (
           <div>
             <h1>Essai</h1>
-            <h2 className="tryCSS">if this page is shown, router works fine</h2>
+            <h2 className="tryCSS">if this page is shown, router works fine...</h2>
           </div>
         )
       }
