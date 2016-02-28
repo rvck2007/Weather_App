@@ -1,8 +1,6 @@
-/** @jsx React.DOM */
-
 var React = require('react');
 
-var ReactApp = React.createClass({
+var Essai = React.createClass({
 
       componentDidMount: function () {
         console.log("component mounted");
@@ -11,12 +9,12 @@ var ReactApp = React.createClass({
       render: function () {
         return (
           <div>
-            <h1> React implem works fine</h1>
-            <h2 className="tryCSS">if this is blue, CSS works fine</h2>
+            <h1>Essai</h1>
+            <h2 className="tryCSS">if this page is shown, router works fine</h2>
           </div>
         )
       }
   });
 
 /* Module.exports instead of normal dom mounting */
-module.exports = ReactApp;
+module.exports = Essai;
