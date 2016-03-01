@@ -9,14 +9,14 @@ var Essai = require('../components/essai');
 var RouterApp = React.createClass({
 
       componentDidMount: function () {
-        console.log("component mounted");
+        console.log("router component mounted");
 
       },
       render: function () {
         return (
           <Router history={browserHistory}>
                 <Route path="/" component={ReactApp} />
-                <Route path="/users" component={Essai} />
+                <Route path="/essai" component={Essai} />
             </Router>
             )
       }
