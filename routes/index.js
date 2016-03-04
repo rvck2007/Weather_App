@@ -7,7 +7,7 @@ var Essai = React.createFactory(require('../views/app/components/essai'));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var reactHtml = React.renderToString(ReactApp({}));
+  var reactHtml = ReactDOMServer.renderToString(ReactApp({}));
   res.render('index.ejs', {reactOutput: reactHtml});
 });
 

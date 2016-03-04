@@ -6,7 +6,6 @@ var ReactApp = React.createClass({
 
       componentDidMount: function () {
         console.log("component mounted");
-
       },
       render: function () {
         return (
