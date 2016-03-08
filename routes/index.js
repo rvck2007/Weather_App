@@ -4,12 +4,15 @@ var React = require('react');
 var ReactDOMServer = require('react-dom/server')
 var ReactApp = React.createFactory(require('../views/app/components/reactApp'));
 var Essai = React.createFactory(require('../views/app/components/essai'));
+var authentMiddleware = require('../utils/authentUtils.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var reactHtml = ReactDOMServer.renderToString(ReactApp({}));
   res.render('index.ejs', {reactOutput: reactHtml});
 });
+
+router.use(authentMiddleware);
 
 router.get('/essai', function(req, res, next) {
   var reactHtml = ReactDOMServer.renderToString(Essai({test: "Salut !"}));

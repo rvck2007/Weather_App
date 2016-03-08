@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var jwt = require('jsonwebtoken');
+var config = require('../config.js');
 
 
 /* GET users listing. */
@@ -29,5 +31,26 @@ router.post('/add', function(req, res, next){
         res.end();
     });
 });
+
+router.post('/authenticate', function(req,res){
+    console.log(req.body.username);
+    User.findOne({username:req.body.username}, function (err, user){
+        if (err) console.error(err);
+        if(user){
+            if (user.password==req.body.password){
+                var token = jwt.sign(user, config.secret, {
+                  expiresInMinutes: 10000
+                });
+                res.json({authentication: true, user: user.username, token: token})
+            }else{
+                res.send('authentication failed: wrong password or username');
+            }
+        }else{
+            res.send('authentication failed: no user found');
+        }
+    })
+
+});
+
 
 module.exports = router;
