@@ -1,3 +1,68 @@
 .tryCSS{
   color:blue;
 }
+
+.homepage{    
+    background-image: url("/images/montagne.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    position: relative;
+}
+
+.homepageTitle{  
+  padding-top: 80px;
+    text-align: center;
+    color: white;
+}
+
+.homepageInput{
+  margin-bottom: 80px;
+}
+
+.homePageLoginSignup{
+  padding-top: 10px;
+}
+
+.homepageSubTitle{  
+  text-align: center;
+  color: white;
+  padding-top: 60px;
+}
+
+.homepageTabs{
+  padding-top: 30px;
+}
+
+.commonOverlay{
+    top:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    position:absolute;
+
+    background-color: black;
+    opacity: 0.6;
+}
+
+homeTopTitle a {
+    text-decoration: none;
+    color: white
+}
+
+homeTopTitle a:hover {
+    text-decoration: none;
+}
+.homeTopTitle{
+    /*position:relative;*/
+    cursor: pointer; cursor: hand;
+    z-index:1;
+}
+
+.homepageOverlay{
+  position:relative;    
+  z-index:1;
+}
+
