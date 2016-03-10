@@ -1,6 +1,7 @@
-/** @jsx React.DOM */
+
 
 var React = require('react');
+var ReactDom = require('react-dom');
 var Input = require('react-bootstrap').Input;
 var Button = require('react-bootstrap').Button;
 var Tab = require('react-bootstrap').Tab;
@@ -10,10 +11,11 @@ var ModalLogin = require('./modalLogin.js');
 
 var Homepage = React.createClass({
 
-  getInitialState: function () {    
+  getInitialState: function () {   
+    console.log(this.props.test);
     return {
         cityValue: '',
-        key: 3
+        key: 1
     }
   },
 
@@ -21,10 +23,10 @@ var Homepage = React.createClass({
     console.log("homepage component mounted");
   },
 
-  handleSelect: function(e) {    
-    //this.setState({key});
-    console.log(e);
-    this.setState({key: e.target.value})
+  handleSelect: function(key) {    
+    this.setState({key});
+    console.log(key);
+    //this.setState({key: e.target.value})
   },
 
   _onChangeCityValue:function(e){
@@ -45,7 +47,7 @@ var Homepage = React.createClass({
 
   render: function () {
 
-    const innerButton = <Button>search</Button>;
+    var innerButton = <Button onClick={this.test}><b>search</b></Button>;
     
 
     return (
@@ -54,7 +56,7 @@ var Homepage = React.createClass({
             <div className="commonOverlay homeOverlayImage"></div>
             <div className="row homePageLoginSignup">
               <div className="col-sm-offset-10 col-sm-1 homeTopTitle">
-                <a className="" onClick={this.test}><b>login</b></a>
+                <a className="" onClick={this.openModalLogin}><b>login</b></a>
                   <ModalLogin ref="modalLogin" />
               </div>
               <div className="col-sm-1 homeTopTitle">
@@ -64,12 +66,12 @@ var Homepage = React.createClass({
             </div>
             <div className="homepageOverlay">
               <h1 className="homepageTitle"> METEO WEATHER FORECAST </h1>
-              <h3 className="homepageSubTitle">please enter a city in the field below</h3>
+              <h4 className="homepageSubTitle">please enter a city in the field below</h4>
               <div className="homepageInput col-sm-offset-4 col-sm-4">
                 <Input
                     type="text" 
-                    placeholder="type a city here" 
-                    buttonAfter={innerButton} 
+                    placeholder="type a city here"
+                    buttonAfter={innerButton}
                     bsSize="small"
                     value={this.state.cityValue} 
                     onChange={this._onChangeCityValue} />
@@ -78,9 +80,11 @@ var Homepage = React.createClass({
         </div>
         <div className="container homepageTabs">
           <Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
-              <Tab eventKey={1} title="Tab 1">Tab 1 content</Tab>
-              <Tab eventKey={2} title="Tab 2">Tab 2 content</Tab>
-              <Tab eventKey={3} title="Tab 3">Tab 3 content</Tab>
+              <Tab eventKey={1} title="Current Weather">Will tell the Current Weather</Tab>
+              <Tab eventKey={2} title="Daily Evolution">Will tell the Daily Evolution</Tab>
+              <Tab eventKey={3} title="Weekly Evolution">Will tell the Weekly Evolution</Tab>
+              <Tab eventKey={4} title="Map">Will tell the Map</Tab>
+              <Tab eventKey={5} title="Pictures slider">Will tell the Pictures slider</Tab>
           </Tabs>
         </div>
       </div>
@@ -88,4 +92,5 @@ var Homepage = React.createClass({
   }
 });
 
+//<script>ReactDom.render(new Homepage({}), document.getElementById('app'));
 module.exports = Homepage;

@@ -12,8 +12,8 @@
   <body>
   <div id="app"><%- reactOutput %><div>
     <script>
-        var params = <%- JSON.stringify(params) %>;
-        ReactDom.render(React.createElement(Essai ,params), document.getElementById('app'));
+      var params = <%- JSON.stringify(params) %>;
+      ReactDom.render(React.createElement(Homepage ,params), document.getElementById('app'));
       </script>
     </body>
   
