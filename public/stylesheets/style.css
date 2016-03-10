@@ -2,7 +2,7 @@
   color:blue;
 }
 
-.homepage{    
+.homepage{
     background-image: url("/images/montagne.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -48,23 +48,19 @@
     opacity: 0.6;
 }
 
-homeTopTitle a {
+homeTopTitle:hover {
     text-decoration: none;
-    color: white
 }
 
-homeTopTitle a:hover {
-    text-decoration: none;
-}
 .homeTopTitle{
     /*position:relative;*/
     cursor: pointer; cursor: hand;
-
+    color: white;
     z-index:1;
 }
 
 .homepageOverlay{
-  position:relative;    
+  position:relative;
   z-index:1;
 }
 

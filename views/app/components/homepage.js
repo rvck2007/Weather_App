@@ -53,16 +53,12 @@ var Homepage = React.createClass({
     return (
       <div>
           <div className="row homepage">
-            <div className="commonOverlay homeOverlayImage"></div>
+            <div className="commonOverlay"></div>
             <div className="row homePageLoginSignup">
-              <div className="col-sm-offset-10 col-sm-1 homeTopTitle">
-                <a className="" onClick={this.openModalLogin}><b>login</b></a>
+               <div className="col-sm-offset-10 col-sm-1 homeTopTitle" onClick={this.openModalLogin}>login</div>
                   <ModalLogin ref="modalLogin" />
-              </div>
-              <div className="col-sm-1 homeTopTitle">
-                  <a className="" onClick={this.openModalSignUp}><b>signup</b></a>
+               <div className="col-sm-1 homeTopTitle" onClick={this.openModalSignUp}>signup</div>
                   <ModalSignUp ref="modalSignUp" />
-              </div>
             </div>
             <div className="homepageOverlay">
               <h1 className="homepageTitle"> METEO WEATHER FORECAST </h1>
