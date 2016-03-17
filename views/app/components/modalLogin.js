@@ -1,9 +1,9 @@
 var React = require('react');
-//var Reflux = require('reflux');
+var Reflux = require('reflux');
 var Modal = require('react-bootstrap').Modal;
 
-//var AuthenticationActions = require('../../actions/authenticationActions.js');
-//var AuthenticationStore = require('../../stores/authenticationStore.js');
+var AuthenticationActions = require('../actions/authenticationActions.js');
+var AuthenticationStore = require('../stores/authenticationStore.js');
 
 var ModalLogin = React.createClass({
     //mixins: [Reflux.connect(AuthenticationStore)],
@@ -24,7 +24,7 @@ var ModalLogin = React.createClass({
 
     handleClick:function(event){
         event.preventDefault();
-        //AuthenticationActions.authenticate(this.state.email,this.state.password);
+        AuthenticationActions.authenticate(this.state.username,this.state.password);
         this.setState({username: ''});
         this.setState({password: ''});
     },

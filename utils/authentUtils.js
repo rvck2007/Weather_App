@@ -16,7 +16,7 @@ var authentMiddleware = function(req, res, next) {
       }
     });
   } else {
-    return res.status(403).send('No token provided.');
+    return res.status(403).send('No token provided...');
   }
 };
 

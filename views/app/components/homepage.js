@@ -8,11 +8,31 @@ var Tab = require('react-bootstrap').Tab;
 var Tabs = require('react-bootstrap').Tabs;
 var ModalSignUp = require('./modalSignUp.js');
 var ModalLogin = require('./modalLogin.js');
+var cookie = require('cookie-dough')();
+
+
+/*function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+*/
+/*function getCookie(name) {
+  match = document.cookie.match(new RegExp(name + '=([^;]+)'));
+  if (match) return match[1];
+}*/
 
 var Homepage = React.createClass({
-
+  
   getInitialState: function () {   
-    console.log(this.props.test);
+    console.log(this.props.city);
+    //var a = getCookie("s")
+    //console.log(cookie.get('s'));
     return {
         cityValue: '',
         key: 1
@@ -42,13 +62,12 @@ var Homepage = React.createClass({
   },
 
   test: function(){
-    alert('it works');
+    location.href = "http://localhost:3000/essai";
   },
 
   render: function () {
 
-    var innerButton = <Button onClick={this.test}><b>search</b></Button>;
-    
+    var innerButton = <input type="submit" name="submit" value="What's the Meteo ?" className="btn btn-primary" />;    
 
     return (
       <div>
@@ -63,15 +82,16 @@ var Homepage = React.createClass({
             <div className="homepageOverlay">
               <h1 className="homepageTitle"> METEO WEATHER FORECAST </h1>
               <h4 className="homepageSubTitle">please enter a city in the field below</h4>
-              <div className="homepageInput col-sm-offset-4 col-sm-4">
+              <form action="/city" method="POST" className="homepageInput col-sm-offset-4 col-sm-4">
                 <Input
-                    type="text" 
+                    type="text"
+                    name="city"
                     placeholder="type a city here"
                     buttonAfter={innerButton}
                     bsSize="small"
                     value={this.state.cityValue} 
                     onChange={this._onChangeCityValue} />
-                </div>
+                </form>
               </div>
         </div>
         <div className="container homepageTabs">

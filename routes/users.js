@@ -3,6 +3,9 @@ var router = express.Router();
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var config = require('../config.js');
+var authentMiddleware = require('../utils/authentUtils.js');
+
+//router.use('/add',authentMiddleware);
 
 
 /* GET users listing. */
@@ -26,9 +29,13 @@ router.post('/add', function(req, res, next){
     newUser.save(function (err) {
         if (err) {
             console.error(err);
+            res.send('error'); //need to be handle better, a proper redirect to error message
         }
         console.log("new user added");
-        res.end();
+        var token = jwt.sign(newUser, config.secret, {
+                  expiresInMinutes: 10000
+                });
+        res.json({username: newUser.username, token:token});
     });
 });
 
