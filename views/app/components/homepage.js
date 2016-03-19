@@ -41,7 +41,9 @@ var Homepage = React.createClass({
         key: 1
     }
   },
-
+  getDefaultProps: function () {
+    return (DataMock)
+  },
   componentDidMount: function () {    
     console.log("homepage component mounted");
   },
@@ -73,7 +75,7 @@ var Homepage = React.createClass({
   render: function () {
 
     var innerButton = <input type="submit" name="submit" value="What's the Meteo ?" className="btn btn-primary" />;    
-    /*this.props.current_condition[0]*/
+    var weatherData = this.props;
     return (
       <div>
           <div className="row homepage">
@@ -99,12 +101,12 @@ var Homepage = React.createClass({
                 </form>
               </div>
         </div>
-        <h3 className="cityTitle">{DataMock.data.request[0].query}</h3>
+        <h3 className="cityTitle">{weatherData.data.request[0].query}</h3>
         <div className="container homepageTabs">
           <Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
-              <Tab eventKey={1} title="Current Weather"><CurrentWeather currentCondition={DataMock.data.current_condition[0]} /></Tab>
+              <Tab eventKey={1} title="Current Weather"><CurrentWeather currentCondition={weatherData.data.current_condition[0]} /></Tab>
               <Tab eventKey={2} title="Daily Evolution">Will tell the Daily Evolution</Tab>
-              <Tab eventKey={3} title="Weekly Evolution"><DaySummaryGroup days={DataMock.data.weather} /></Tab>
+              <Tab eventKey={3} title="Weekly Evolution"><DaySummaryGroup days={weatherData.data.weather} /></Tab>
               <Tab eventKey={4} title="Map">Will tell the Map</Tab>
               <Tab eventKey={5} title="Pictures slider">Will tell the Pictures slider</Tab>
           </Tabs>
