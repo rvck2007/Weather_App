@@ -48,7 +48,7 @@ router.get('/:city', function(req, res, next) {
   console.log(req.params.city);
   var city = req.params.city;
   var apiKey = '63e2008bb395370c0510bbac7155b';
-  var requestUrl = 'https://api.worldweatheronline.com/free/v2/weather.ashx?q=' + city + '&num_of_days=5'
+  var requestUrl = 'https://api.worldweatheronline.com/free/v2/weather.ashx?q=' + city + '&num_of_days=7'
         + '&key=' + apiKey + '&tp=24&format=json';
 
     request(requestUrl, function (error, response, body){
@@ -63,7 +63,7 @@ router.post('/:city', function(req, res, next) {
   console.log(req.params.city);
   var city = req.params.city;
   var apiKey = '63e2008bb395370c0510bbac7155b';
-  var requestUrl = 'https://api.worldweatheronline.com/free/v2/weather.ashx?q=' + city + '&num_of_days=5'
+  var requestUrl = 'https://api.worldweatheronline.com/free/v2/weather.ashx?q=' + city + '&num_of_days=7'
         + '&key=' + apiKey + '&tp=24&format=json';
 
     request(requestUrl, function (error, response, body){
