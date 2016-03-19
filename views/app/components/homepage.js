@@ -26,10 +26,6 @@ var CityStore = require('../stores/cityStore.js');
     return "";
 }
 */
-/*function getCookie(name) {
-  match = document.cookie.match(new RegExp(name + '=([^;]+)'));
-  if (match) return match[1];
-}*/
 
 var Homepage = React.createClass({
   mixins: [Reflux.connect(CityStore, "store")],
@@ -103,7 +99,6 @@ var Homepage = React.createClass({
                 </form>
               </div>
         </div>
-        <a href={"http://localhost:3000/"+ this.state.cityValue}>essai</a>
         <div className="container homepageTabs">
           <Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
               <Tab eventKey={1} title="Current Weather">Will tell the Current Weather</Tab>
