@@ -2,7 +2,7 @@ var Reflux = require('reflux');
 var $ = require('jquery');
 var UserActions = require('../actions/userActions');
 
-var AuthenticationStore = Reflux.createStore({
+var UserStore = Reflux.createStore({
     listenables: UserActions,
     onAddUser : function (username,password) {
         $.ajax({
@@ -22,4 +22,4 @@ var AuthenticationStore = Reflux.createStore({
     }
 });
 
-module.exports = AuthenticationStore;
+module.exports = UserStore;

@@ -2,6 +2,7 @@
 
 var React = require('react');
 var ReactDom = require('react-dom');
+var Reflux = require('reflux');
 var Input = require('react-bootstrap').Input;
 var Button = require('react-bootstrap').Button;
 var Tab = require('react-bootstrap').Tab;
@@ -9,6 +10,9 @@ var Tabs = require('react-bootstrap').Tabs;
 var ModalSignUp = require('./modalSignUp.js');
 var ModalLogin = require('./modalLogin.js');
 var cookie = require('cookie-dough')();
+
+var CityActions = require('../actions/cityActions.js');
+var CityStore = require('../stores/cityStore.js');
 
 
 /*function getCookie(cname) {
@@ -28,25 +32,23 @@ var cookie = require('cookie-dough')();
 }*/
 
 var Homepage = React.createClass({
-  
+  mixins: [Reflux.connect(CityStore, "store")],
   getInitialState: function () {   
-    console.log(this.props.city);
-    //var a = getCookie("s")
-    //console.log(cookie.get('s'));
+    console.log(this.props);
     return {
         cityValue: '',
+        cityEssai: 'liverpool',
         key: 1
     }
   },
 
-  componentDidMount: function () {
+  componentDidMount: function () {    
     console.log("homepage component mounted");
   },
 
   handleSelect: function(key) {    
     this.setState({key});
     console.log(key);
-    //this.setState({key: e.target.value})
   },
 
   _onChangeCityValue:function(e){
@@ -60,6 +62,13 @@ var Homepage = React.createClass({
   openModalSignUp: function (){
     this.refs.modalSignUp.open()
   },
+
+  /* for AJAX call client side DEPRECATED */
+  /*launchSearch: function(event){
+        event.preventDefault();
+        CityActions.search(this.state.cityValue);
+        //this.refs.modalSignUp.open()
+  },*/
 
   test: function(){
     location.href = "http://localhost:3000/essai";
@@ -82,7 +91,7 @@ var Homepage = React.createClass({
             <div className="homepageOverlay">
               <h1 className="homepageTitle"> METEO WEATHER FORECAST </h1>
               <h4 className="homepageSubTitle">please enter a city in the field below</h4>
-              <form action="/city" method="POST" className="homepageInput col-sm-offset-4 col-sm-4">
+              <form method="POST" action={"/"+this.state.cityValue} className="homepageInput col-sm-offset-4 col-sm-4">
                 <Input
                     type="text"
                     name="city"
@@ -94,6 +103,7 @@ var Homepage = React.createClass({
                 </form>
               </div>
         </div>
+        <a href={"http://localhost:3000/"+ this.state.cityValue}>essai</a>
         <div className="container homepageTabs">
           <Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
               <Tab eventKey={1} title="Current Weather">Will tell the Current Weather</Tab>
@@ -108,5 +118,9 @@ var Homepage = React.createClass({
   }
 });
 
-//<script>ReactDom.render(new Homepage({}), document.getElementById('app'));
+
 module.exports = Homepage;
+
+/* for AJAX called client side DEPRECATED */
+/*<form onSubmit={this.launchSearch} className="homepageInput col-sm-offset-4 col-sm-4">
+                */

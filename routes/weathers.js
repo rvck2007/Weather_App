@@ -6,9 +6,6 @@ var config = require('../config.js');
 var authentMiddleware = require('../utils/authentUtils.js');
 
 
-// route middleware to verify a token
-//WARNING: all the routes placed above this line won't be protected
-router.use(authentMiddleware);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) { 

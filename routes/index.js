@@ -8,13 +8,14 @@ var Essai = React.createFactory(require('../views/app/components/essai'));
 var authentMiddleware = require('../utils/authentUtils.js');
 var cookieParser = require('cookie-parser');
 var CookieDough = require('cookie-dough');
+var request = require('request');
 
 router.use('/essai',authentMiddleware);
 router.use(cookieParser());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {  
-  var params = {city: "Salut !"};
+  var params = {city: "marseille", country:"france"};
   var reactHtml = ReactDOMServer.renderToString(Homepage(params));
   res.render('homepage.ejs', {reactOutput: reactHtml, params:params});
 });
@@ -22,9 +23,55 @@ router.get('/', function(req, res, next) {
 router.post('/city', function(req, res, next) {  
   console.log(req.body.city);
   console.log(req.cookies);
-  var params = {city: req.body.city};
+  var city = req.body.city;
+  var apiKey = '63e2008bb395370c0510bbac7155b';
+  var requestUrl = 'https://api.worldweatheronline.com/free/v2/weather.ashx?q=' + city + '&num_of_days=5'
+        + '&key=' + apiKey + '&tp=24&format=json';
+
+    request(requestUrl, function (error, response, body){
+      if (error) res.json({error:"error with the api"});
+      var params = JSON.parse(body);
+      var reactHtml = ReactDOMServer.renderToString(Homepage(params));
+      res.render('homepage.ejs', {reactOutput: reactHtml, params:params});      
+      });
+});
+
+router.get('/city/:city', function(req, res, next) {  
+  
+  var params = {city: req.params.city};
   var reactHtml = ReactDOMServer.renderToString(Homepage(params));
   res.render('homepage.ejs', {reactOutput: reactHtml, params:params});
+});
+
+
+router.get('/:city', function(req, res, next) {  
+  console.log(req.params.city);
+  var city = req.params.city;
+  var apiKey = '63e2008bb395370c0510bbac7155b';
+  var requestUrl = 'https://api.worldweatheronline.com/free/v2/weather.ashx?q=' + city + '&num_of_days=5'
+        + '&key=' + apiKey + '&tp=24&format=json';
+
+    request(requestUrl, function (error, response, body){
+      if (error) res.json({error:"error with the api"});
+      var params = JSON.parse(body);
+      var reactHtml = ReactDOMServer.renderToString(Homepage(params));
+      res.render('homepage.ejs', {reactOutput: reactHtml, params:params});      
+      });
+});
+
+router.post('/:city', function(req, res, next) {  
+  console.log(req.params.city);
+  var city = req.params.city;
+  var apiKey = '63e2008bb395370c0510bbac7155b';
+  var requestUrl = 'https://api.worldweatheronline.com/free/v2/weather.ashx?q=' + city + '&num_of_days=5'
+        + '&key=' + apiKey + '&tp=24&format=json';
+
+    request(requestUrl, function (error, response, body){
+      if (error) res.json({error:"error with the api"});
+      var params = JSON.parse(body);
+      var reactHtml = ReactDOMServer.renderToString(Homepage(params));
+      res.render('homepage.ejs', {reactOutput: reactHtml, params:params});      
+      });
 });
 
 //router.use('/essai',authentMiddleware);
