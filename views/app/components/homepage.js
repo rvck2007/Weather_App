@@ -1,5 +1,3 @@
-
-
 var React = require('react');
 var ReactDom = require('react-dom');
 var Reflux = require('reflux');
@@ -11,8 +9,14 @@ var ModalSignUp = require('./modalSignUp.js');
 var ModalLogin = require('./modalLogin.js');
 var cookie = require('cookie-dough')();
 
+var CurrentWeather = require('./weather/current/currentWeather.js');
+var DaySummaryGroup = require('./weather/weeklySummary/daysummaryGroup.js');
+
 var CityActions = require('../actions/cityActions.js');
 var CityStore = require('../stores/cityStore.js');
+
+var DataMock = require('./weather/dataMock.js');
+
 
 
 /*function getCookie(cname) {
@@ -30,10 +34,10 @@ var CityStore = require('../stores/cityStore.js');
 var Homepage = React.createClass({
   mixins: [Reflux.connect(CityStore, "store")],
   getInitialState: function () {   
-    console.log(this.props);
+    //console.log(this.props);
+    console.log(DataMock);
     return {
         cityValue: '',
-        cityEssai: 'liverpool',
         key: 1
     }
   },
@@ -66,14 +70,10 @@ var Homepage = React.createClass({
         //this.refs.modalSignUp.open()
   },*/
 
-  test: function(){
-    location.href = "http://localhost:3000/essai";
-  },
-
   render: function () {
 
     var innerButton = <input type="submit" name="submit" value="What's the Meteo ?" className="btn btn-primary" />;    
-
+    /*this.props.current_condition[0]*/
     return (
       <div>
           <div className="row homepage">
@@ -99,11 +99,12 @@ var Homepage = React.createClass({
                 </form>
               </div>
         </div>
+        <h3 className="cityTitle">{DataMock.data.request[0].query}</h3>
         <div className="container homepageTabs">
           <Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
-              <Tab eventKey={1} title="Current Weather">Will tell the Current Weather</Tab>
+              <Tab eventKey={1} title="Current Weather"><CurrentWeather currentCondition={DataMock.data.current_condition[0]} /></Tab>
               <Tab eventKey={2} title="Daily Evolution">Will tell the Daily Evolution</Tab>
-              <Tab eventKey={3} title="Weekly Evolution">Will tell the Weekly Evolution</Tab>
+              <Tab eventKey={3} title="Weekly Evolution"><DaySummaryGroup days={DataMock.data.weather} /></Tab>
               <Tab eventKey={4} title="Map">Will tell the Map</Tab>
               <Tab eventKey={5} title="Pictures slider">Will tell the Pictures slider</Tab>
           </Tabs>
@@ -119,3 +120,12 @@ module.exports = Homepage;
 /* for AJAX called client side DEPRECATED */
 /*<form onSubmit={this.launchSearch} className="homepageInput col-sm-offset-4 col-sm-4">
                 */
+/*
+<Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
+    <Tab eventKey={1} title="Current Weather">Will tell the Current Weather</Tab>
+    <Tab eventKey={2} title="Daily Evolution">Will tell the Daily Evolution</Tab>
+    <Tab eventKey={3} title="Weekly Evolution">Will tell the Weekly Evolution</Tab>
+    <Tab eventKey={4} title="Map">Will tell the Map</Tab>
+    <Tab eventKey={5} title="Pictures slider">Will tell the Pictures slider</Tab>
+</Tabs>
+*/

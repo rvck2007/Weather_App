@@ -64,3 +64,14 @@ homeTopTitle:hover {
   z-index:1;
 }
 
+.weeklyEvolution{
+  display: inline-block;
+  padding-left: 40px;
+}
+.cityTitle{
+  padding-left: 50px;
+}
+
+.weatherContent{
+  padding-top: 15px;
+}
