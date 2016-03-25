@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title JADE Weather app
+    link(href='/images/favicon.ico', rel='icon', type='image/x-icon')
+    link(rel='stylesheet', href='/node_modules/bootstrap/dist/css/bootstrap.min.css')
+    link(href='/stylesheets/style.css', rel='stylesheet')
+    script(src='/node_modules/jquery/dist/jquery.min.js')
+    script(src='/node_modules/bootstrap/dist/js/bootstrap.min.js')
+  body
+    div#app!{reactOutput}
+    script(src='/appMain.js')
+    script.
+      var params = !{JSON.stringify(params)};
+      ReactDom.render(React.createElement(Homepage ,params), document.getElementById('app'));

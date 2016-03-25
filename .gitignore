@@ -231,3 +231,7 @@ bower_components
 ### Sass ###
 .sass-cache/
 *.css.map
+
+### public ###
+public/node_modules
+public/etc

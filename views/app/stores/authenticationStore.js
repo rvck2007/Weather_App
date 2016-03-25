@@ -15,7 +15,7 @@ var AuthenticationStore = Reflux.createStore({
           success: function(data) {
               console.log(data);
               document.cookie = "s=" + data['token']+ "; path=/"; //the 'path=/' make the cookie global
-              document.cookie = "sok=" + data['authentication']+"; path=/";
+              document.cookie = "sid=" + data['user']+"; path=/";
               location.href = "http://localhost:3000";
           }
         });

@@ -75,3 +75,8 @@ homeTopTitle:hover {
 .weatherContent{
   padding-top: 15px;
 }
+
+.highchartsDiv{
+  width:50%; 
+  height:400px;
+}

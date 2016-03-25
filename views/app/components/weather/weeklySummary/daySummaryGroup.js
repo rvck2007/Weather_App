@@ -3,6 +3,7 @@ var DaySummary = require('./daySummary');
 
 var DaySummaryGroup = React.createClass({
   render : function () {
+    var i = 0;
     return (
       <div className="weatherContent">
         {
@@ -14,7 +15,8 @@ var DaySummaryGroup = React.createClass({
                   maxTempCelsius = {day.maxtempC}
                   minTempCelsius = {day.mintempC}
                   maxTempFahrenheit = {day.maxtempF}
-                  minTempFahrenheit = {day.mintempF} />
+                  minTempFahrenheit = {day.mintempF} 
+                  key = {++i} />
               )
           })
         }

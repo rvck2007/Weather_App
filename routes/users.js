@@ -35,7 +35,7 @@ router.post('/add', function(req, res, next){
         var token = jwt.sign(newUser, config.secret, {
                   expiresInMinutes: 10000
                 });
-        res.json({username: newUser.username, token:token});
+        res.json({user: newUser.username, token:token});
     });
 });
 
