@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
-var config = require('../config.js');
+var config = require('../utils/config/config.js');
 var authentMiddleware = require('../utils/authentUtils.js');
 
 //router.use('/add',authentMiddleware);

@@ -1,4 +1,4 @@
-var configApi = require('../configApi.js');
+var configApi = require('./config/configApi.js');
 var request = require('request');
 
 

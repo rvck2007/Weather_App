@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-var config = require('../config.js');
+var config = require('./config/config.js');
 
 var authentMiddleware = function(req, res, next) {
   // check header or url parameters or post parameters for token

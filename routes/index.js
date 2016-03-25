@@ -1,13 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var React = require('react');
-var ReactDOM = require('react-dom');
 var ReactDOMServer = require('react-dom/server');
 var Homepage = React.createFactory(require('../views/app/components/homepage'));
 var Essai = React.createFactory(require('../views/app/components/essai'));
 var authentMiddleware = require('../utils/authentUtils.js');
 var cookieParser = require('cookie-parser');
-var CookieDough = require('cookie-dough');
 var request = require('request');
 var api = require('../utils/apiUtils.js');
 

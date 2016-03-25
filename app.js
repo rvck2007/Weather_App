@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var config = require('./config.js');
+var config = require('./utils/config/config.js');
 
 mongoose.connect(config.database);
 
@@ -14,7 +14,6 @@ require('node-jsx').install();
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var weathers = require('./routes/weathers');
 
 
 var app = express();
@@ -34,9 +33,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/user', users); 
 app.use('/', routes);
-app.use('/weather', weathers);
+app.use('/user', users);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
