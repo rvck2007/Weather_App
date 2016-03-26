@@ -11,6 +11,7 @@ var ModalLogin = require('./modalLogin.js');
 var CurrentWeather = require('./weather/current/currentWeather.js');
 var DaySummaryGroup = require('./weather/weeklySummary/daysummaryGroup.js');
 
+
 var CityActions = require('../actions/cityActions.js');
 var CityStore = require('../stores/cityStore.js');
 
@@ -118,14 +119,14 @@ var Homepage = React.createClass({
             <div className="homepageOverlay">
               <h1 className="homepageTitle"> METEO WEATHER FORECAST </h1>
               <h4 className="homepageSubTitle">please enter a city in the field below</h4>
-              <form method="POST" action={"/"+this.state.cityValue} className="homepageInput col-sm-offset-4 col-sm-4">
+              <form method="POST" action={"/city/"+this.state.cityValue} className="homepageInput col-sm-offset-4 col-sm-4">
                 <Input
                     type="text"
                     name="city"
                     placeholder="type a city here"
                     buttonAfter={innerButton}
                     bsSize="small"
-                    value={this.state.cityValue} 
+                    value={this.state.cityValue}
                     onChange={this._onChangeCityValue} />
                 </form>
               </div>
@@ -135,14 +136,14 @@ var Homepage = React.createClass({
           <Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
               <Tab eventKey={1} title="Current Weather"><CurrentWeather currentCondition={weatherData.data.current_condition[0]} /></Tab>
               <Tab eventKey={2} title="Weekly Weather"><DaySummaryGroup days={weatherData.data.weather} /></Tab>
-              <Tab eventKey={3} title="Weekly Evolution">Will tell the weekly evolution</Tab>              
+              <Tab eventKey={3} title="Weekly Evolution">Will tell the Map WeeklyEvolution </Tab>
               {this.state.cookie !=''
                 ?
-                <Tab eventKey={4} title="Map">Will tell the Map</Tab>
+                  <Tab eventKey={4} title="Map">Will tell the Map</Tab>
                 : null}
               {this.state.cookie !=''
                 ?
-                <Tab eventKey={5} title="Daily Evolution">Will tell the Daily Evolution</Tab>
+                  <Tab eventKey={5} title="Daily Evolution">Will tell the Daily Evolution</Tab>
                 : null}
           </Tabs>
         </div>
