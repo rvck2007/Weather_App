@@ -1,6 +1,7 @@
 var configApi = require('./config/configApi.js');
 var request = require('request');
-
+var Weather = require('../models/Weather');
+var R = require('ramda');
 
 var WeatherApi = {
 
@@ -10,97 +11,60 @@ var WeatherApi = {
         + '&key=' + configApi.apiKey + '&tp=24&format=json';
       request(requestUrl, (error, response, body) => {
         if (error) reject (error);
-        else resolve(JSON.parse(body));
+        else resolve(new Weather(this.toModel(JSON.parse(body))));
         });
     })
   },
 
-  findWeeklyMaxTempCelsius : function (jsonData) {
-    return jsonData.data.weather.map(function(weatherDay){
-      return weatherDay.maxtempC;
-    });
-  },
+  toModel: function (jsonData) {
+    var jsResult = R.mapObjIndexed(function(val, key, obj) {
 
-  findWeeklyMinTempCelsius : function (jsonData) {
-    return jsonData.data.weather.map(function(weatherDay){
-      return weatherDay.mintempC;
-    });
-  },
+    switch(key) {
+      case 'request':
+      var value = val[0]
+        return {
+          "place": {
+            "city": value.query
+          }
+        }
+      case 'weather':
+        return {
+          "weekly" :
+              val.map(function(value) {
+                return {
+                    "weatherCode": value.hourly[0].weatherCode,
+                    "date": value.date,
+                    "maxtempF": value.maxtempF,
+                    "mintempF": value.mintempF,
+                    "maxtempC": value.maxtempC,
+                    "mintempC": value.mintempC,
+                    "humidity": value.hourly[0].humidity,
+                    "visibility": value.hourly[0].visibility,
+                    "pressure": value.hourly[0].pressure,
+                    "cloudcover": value.hourly[0].cloudcover
+                }
+              })
+        }
+      case 'current_condition':
+      var value = val[0]
+        return {
+          "currently" : {
+            "current": value.weatherDesc[0].value,
+            "winddir16Point": value.winddir16Point,
+            "windspeedMiles": value.windspeedMiles,
+            "windspeedKmph": value.windspeedKmph,
+            "humidity": value.humidity
+          }
+        }
 
-  findWeeklyHumidity : function (jsonData) {
-    return jsonData.data.weather.map(function(weatherDay){
-      return weatherDay.hourly[0].humidity;
-    });
-  },
+      default: return null
+    }
+   }, jsonData.data)
 
-  findWeeklyVisibility : function (jsonData) {
-    return jsonData.data.weather.map(function(weatherDay){
-      return weatherDay.hourly[0].visibility;
-    });
-  },
-
-  findWeeklyPressure : function (jsonData) {
-    return jsonData.data.weather.map(function(weatherDay){
-      return weatherDay.hourly[0].pressure;
-    });
-  },
-
-  findWeeklyCloudcover : function (jsonData) {
-    return jsonData.data.weather.map(function(weatherDay){
-      return weatherDay.hourly[0].cloudcover;
-    });
-  },
-
-  findCurrentWeather : function (jsonData){
-    return jsonData.data.current_condition.map(function(currentWeather){
-      return ({
-        "current": currentWeather.weatherDesc[0].value,
-        "winddir16Point": currentWeather.winddir16Point,
-        "windspeedMiles": currentWeather.windspeedMiles,
-        "windspeedKmph": currentWeather.windspeedKmph,
-        "humidity": currentWeather.humidity
-      })
-    })
-  },
-
-  findWeeklyWeather : function (jsonData) {
-    return jsonData.data.weather.map(function (weatherDay){
-      return ({
-        "weatherCode": weatherDay.hourly[0].weatherCode,
-        "currentDate": weatherDay.date,
-        "maxTempCelsius": weatherDay.maxtempC,
-        "minTempCelsius": weatherDay.mintempC,
-        "maxTempFahrenheit": weatherDay.maxtempF,
-        "minTempFahrenheit": weatherDay.mintempF
-      })
-    });
-  },
-
-  findWeeklyEvolution : function (jsonData) {
-    return ({
-      "maxtempC": this.findWeeklyMaxTempCelsius(jsonData),
-      "mintempC": this.findWeeklyMinTempCelsius(jsonData)
-    })
-  },
-
-  findWeeklyParams : function (jsonData) {
-    return ({
-      "humidity": this.findWeeklyHumidity(jsonData),
-      "visibility": this.findWeeklyVisibility(jsonData),
-      "pressure": this.findWeeklyPressure(jsonData),
-      "cloudcover": this.findWeeklyCloudcover(jsonData)
-    })
-  },
-
-  constructJsonForReact: function (jsonData) {
-    return ({
-      "currentWeather": this.findCurrentWeather(jsonData),
-      "weeklyWeather": this.findWeeklyWeather(jsonData),
-      "weeklyEvolution": this.findWeeklyEvolution(jsonData),
-      "weeklyParams": this.findWeeklyParams(jsonData)
-    })
+    return R.values(jsResult).filter(e => e !== null).reduce(function(acc, obj) {
+      return R.merge(acc, obj)
+    }, {})
   }
-
 }
 
 module.exports = WeatherApi;
