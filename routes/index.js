@@ -54,4 +54,15 @@ router.get('/essai', function(req, res, next) {
   res.render('index', {reactOutput: reactHtml, params:params});
 });
 
+
+router.get('/try/:city', function(req, res, next) {
+  apiUtils.apiCall(req.params.city)
+    .then((jsonParams) => {
+      res.json(apiUtils.constructJsonForReact(jsonParams));
+    })
+    .catch((errs) => {
+      res.json({error:"error with the api"});
+    })
+});
+
 module.exports = router;

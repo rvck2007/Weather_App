@@ -40,7 +40,7 @@ function deleteAllCookies() {
 
 var Homepage = React.createClass({
   mixins: [Reflux.connect(CityStore, "store")],
-  getInitialState: function () {   
+  getInitialState: function () {
     //console.log(this.props);
     console.log(DataMock);
     return {
@@ -56,14 +56,14 @@ var Homepage = React.createClass({
   componentWillMount : function () {
     
   },
-  componentDidMount: function () {    
+  componentDidMount: function () {
     console.log(getCookie('s'));
     this.setState({cookie : getCookie('s')});
     this.setState({username : getCookie('sid')});
     console.log("homepage component mounted");
   },
 
-  handleSelect: function(key) {    
+  handleSelect: function(key) {
     this.setState({key});
     console.log(key);
   },
@@ -136,14 +136,13 @@ var Homepage = React.createClass({
           <Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
               <Tab eventKey={1} title="Current Weather"><CurrentWeather currentCondition={weatherData.data.current_condition[0]} /></Tab>
               <Tab eventKey={2} title="Weekly Weather"><DaySummaryGroup days={weatherData.data.weather} /></Tab>
-              <Tab eventKey={3} title="Weekly Evolution">Will tell the Map WeeklyEvolution </Tab>
               {this.state.cookie !=''
                 ?
-                  <Tab eventKey={4} title="Map">Will tell the Map</Tab>
-                : null}
+                  <Tab eventKey={3} title="Weekly Evolution">Will tell the Map WeeklyEvolution </Tab>
+              : null}
               {this.state.cookie !=''
                 ?
-                  <Tab eventKey={5} title="Daily Evolution">Will tell the Daily Evolution</Tab>
+                  <Tab eventKey={4} title="Weekly Parameters">Will tell the WeeklyParameters</Tab>
                 : null}
           </Tabs>
         </div>
@@ -158,12 +157,3 @@ module.exports = Homepage;
 /* for AJAX called client side DEPRECATED */
 /*<form onSubmit={this.launchSearch} className="homepageInput col-sm-offset-4 col-sm-4">
                 */
-/*
-<Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
-    <Tab eventKey={1} title="Current Weather">Will tell the Current Weather</Tab>
-    <Tab eventKey={2} title="Daily Evolution">Will tell the Daily Evolution</Tab>
-    <Tab eventKey={3} title="Weekly Evolution">Will tell the Weekly Evolution</Tab>
-    <Tab eventKey={4} title="Map">Will tell the Map</Tab>
-    <Tab eventKey={5} title="Pictures slider">Will tell the Pictures slider</Tab>
-</Tabs>
-*/
