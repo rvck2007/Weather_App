@@ -14,32 +14,32 @@ var renderUtils = require('../utils/renderUtils.js');
 router.use(cookieParser());
 
 /* GET home page. */
-router.get('/', function(req, res, next) {  
+router.get('/', function(req, res, next) {
   var jsonParams = {city: "marseille", country:"france"};
-  console.log(req.cookies);
   renderUtils.renderReactComponent(req,res,
         '../views/app/components/homepage',
         'homepage',jsonParams);
 });
 
-router.get('/city/:city', function(req, res, next) {  
+router.get('/city/:city', function(req, res, next) {
   apiUtils.apiCall(req.params.city)
-    .then((jsonParams) => {
+    .then((weather) => {
       renderUtils.renderReactComponent(req,res,
         '../views/app/components/homepage',
-        'homepage',jsonParams);
+        'homepage',weather.toJson());
     })
     .catch((errs) => {
+      console.log(errs)
       res.json({error:"error with the api"});
     })
 });
 
-router.post('/city/:city', function(req, res, next) {  
+router.post('/city/:city', function(req, res, next) {
   apiUtils.apiCall(req.params.city)
-    .then((jsonParams) => {
+    .then((weather) => {
       renderUtils.renderReactComponent(req,res,
         '../views/app/components/homepage',
-        'homepage',jsonParams);
+        'homepage', weather.toJson());
     })
     .catch((errs) => {
       res.json({error:"error with the api"});
@@ -57,8 +57,8 @@ router.get('/essai', function(req, res, next) {
 
 router.get('/try/:city', function(req, res, next) {
   apiUtils.apiCall(req.params.city)
-    .then((jsonParams) => {
-      res.json(apiUtils.constructJsonForReact(jsonParams));
+    .then((weather) => {
+      res.json(weather.toJson());
     })
     .catch((errs) => {
       res.json({error:"error with the api"});

@@ -41,8 +41,6 @@ function deleteAllCookies() {
 var Homepage = React.createClass({
   mixins: [Reflux.connect(CityStore, "store")],
   getInitialState: function () {
-    //console.log(this.props);
-    console.log(DataMock);
     return {
         cityValue: '',
         key: 1,
@@ -50,11 +48,11 @@ var Homepage = React.createClass({
         username : ''
     }
   },
-  getDefaultProps: function () {
-    return (DataMock)
-  },
+  // getDefaultProps: function () {
+  //   return (DataMock)
+  // },
   componentWillMount : function () {
-    
+
   },
   componentDidMount: function () {
     console.log(getCookie('s'));
@@ -85,17 +83,10 @@ var Homepage = React.createClass({
     location.href = "http://localhost:3000";
   },
 
-  /* for AJAX call client side DEPRECATED */
-  /*launchSearch: function(event){
-        event.preventDefault();
-        CityActions.search(this.state.cityValue);
-        //this.refs.modalSignUp.open()
-  },*/
-
   render: function () {
 
-    var innerButton = <input type="submit" name="submit" value="What's the Meteo ?" className="btn btn-primary" />;    
-    
+    var innerButton = <input type="submit" name="submit" value="What's the Meteo ?" className="btn btn-primary" />;
+
     var weatherData = this.props;
     return (
       <div>
@@ -131,11 +122,11 @@ var Homepage = React.createClass({
                 </form>
               </div>
         </div>
-        <h3 className="cityTitle">{weatherData.data.request[0].query}</h3>
+        <h3 className="cityTitle">{weatherData.place.city}</h3>
         <div className="container homepageTabs">
           <Tabs activeKey={this.state.key} onSelect={this.handleSelect}>
-              <Tab eventKey={1} title="Current Weather"><CurrentWeather currentCondition={weatherData.data.current_condition[0]} /></Tab>
-              <Tab eventKey={2} title="Weekly Weather"><DaySummaryGroup days={weatherData.data.weather} /></Tab>
+              <Tab eventKey={1} title="Current Weather"><CurrentWeather currentCondition={weatherData.currently} /></Tab>
+              <Tab eventKey={2} title="Weekly Weather"><DaySummaryGroup days={weatherData.weekly} /></Tab>
               {this.state.cookie !=''
                 ?
                   <Tab eventKey={3} title="Weekly Evolution">Will tell the Map WeeklyEvolution </Tab>

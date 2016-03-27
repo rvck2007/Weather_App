@@ -10,12 +10,12 @@ var DaySummaryGroup = React.createClass({
           this.props.days.map(function(day){
             return (
                 <DaySummary
-                  weatherCode = {day.hourly[0].weatherCode}
+                  weatherCode = {day.weatherCode}
                   currentDate = {day.date}
                   maxTempCelsius = {day.maxtempC}
                   minTempCelsius = {day.mintempC}
                   maxTempFahrenheit = {day.maxtempF}
-                  minTempFahrenheit = {day.mintempF} 
+                  minTempFahrenheit = {day.mintempF}
                   key = {++i} />
               )
           })

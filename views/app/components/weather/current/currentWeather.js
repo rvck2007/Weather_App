@@ -2,17 +2,16 @@ var React = require('react');
 
 var CurrentWeather = React.createClass({
   render: function () {
-    var currentCondition = this.props.currentCondition;
     return (
       <div className="weatherContent">
-        <p>Current: <strong>{currentCondition.weatherDesc[0].value}</strong></p>
+        <p>Current: <strong>{this.props.currentCondition.current}</strong></p>
         <p>{
-          "Wind:" + currentCondition.winddir16Point + 
-          " at " + currentCondition.windspeedMiles + 
-          " mph - " + currentCondition.windspeedKmph + 
+          "Wind:" + this.props.currentCondition.winddir16Point +
+          " at " + this.props.currentCondition.windspeedMiles +
+          " mph - " + this.props.currentCondition.windspeedKmph +
           " km/h"
         }</p>
-        <p>{"Humidity: " + currentCondition.humidity}</p>
+        <p>{"Humidity: " + this.props.currentCondition.humidity}</p>
       </div>
       )
   }
